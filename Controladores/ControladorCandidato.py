@@ -9,7 +9,7 @@ class ControladorCandidato():
         unCandidato = {
             "_id": "abc124",
             "cedula": "124",
-            "nombre": "Luis",
+            "nombre": "Luis Alberto",
             "apellido": "Garcia"
         }
         return [unCandidato]
