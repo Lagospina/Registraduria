@@ -10,8 +10,13 @@ cors = CORS(app)
 
 from Controladores.ControladorCandidato import ControladorCandidato
 from Controladores.ControladorMesa import ControladorMesa
+from Controladores.ControladorResultado import ControladorResultado
+from Controladores.ControladorPartido import ControladorPartido
+
 miControladorCandidato = ControladorCandidato()
 miControladorMesa = ControladorMesa()
+miControladorResultado = ControladorResultado()
+miControladorPartido = ControladorPartido()
 
 # Métodos controladorCandidato
 @app.route("/candidatos", methods=['GET'])
@@ -74,6 +79,64 @@ def eliminarMesa(numero):
     json = miControladorMesa.delete(numero)
     return jsonify(json)
 # Finaliza controladorMesa
+
+# Métodos controladorResultado
+@app.route("/resultado", methods=['GET'])
+def getResultado():
+    json = miControladorResultado.index()
+    return jsonify(json)
+
+@app.route("/resultado", methods=['POST'])
+def crearResultado():
+    data = request.get_json()
+    json = miControladorResultado.create(data)
+    return jsonify(json)
+
+@app.route("/resultado/<string:id>", methods=['GET'])
+def getResultados(id):
+    json = miControladorResultado.show(id)
+    return jsonify(json)
+
+@app.route("/resultado/<string:id>", methods=['PUT'])
+def modificarResultado(id):
+    data = request.get_json()
+    json = miControladorResultado.update(id, data)
+    return jsonify(json)
+
+@app.route("/resultado/<string:id>", methods=['DELETE'])
+def eliminarResultado(id):
+    json = miControladorResultado.delete(id)
+    return jsonify(json)
+# Finaliza controladorResultado
+
+# Métodos controladorPartido
+@app.route("/partido", methods=['GET'])
+def getPartido():
+    json = miControladorPartido.index()
+    return jsonify(json)
+
+@app.route("/partido", methods=['POST'])
+def crearPartido():
+    data = request.get_json()
+    json = miControladorPartido.create(data)
+    return jsonify(json)
+
+@app.route("/partido/<string:id>", methods=['GET'])
+def getPartidos(id):
+    json = miControladorPartido.show(id)
+    return jsonify(json)
+
+@app.route("/partido/<string:id>", methods=['PUT'])
+def modificarPartido(id):
+    data = request.get_json()
+    json = miControladorPartido.update(id, data)
+    return jsonify(json)
+
+@app.route("/partido/<string:id>", methods=['DELETE'])
+def eliminarPartido(id):
+    json = miControladorPartido.delete(id)
+    return jsonify(json)
+# Finaliza controladorPartido
 
 def loadFileConfig():
     with open('config.json') as f:
