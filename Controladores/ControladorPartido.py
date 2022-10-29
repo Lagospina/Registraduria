@@ -26,7 +26,7 @@ class ControladorPartido():
         }
     def update(self, id, infoPartido):
         print("Actualizando partido con id ", id)
-        elPartido = Partido(infoMesa)
+        elPartido = Partido(infoPartido)
         return elPartido.__dict__
 
     def delete(self, id):
