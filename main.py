@@ -143,7 +143,6 @@ def loadFileConfig():
         data = json.load(f)
     return data
 
-
 if __name__ == '__main__':
     dataConfig = loadFileConfig()
     print("Server running : " + "http://" + dataConfig["url-backend"] + ":" + str(dataConfig["port"]))
