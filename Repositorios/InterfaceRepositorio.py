@@ -6,7 +6,7 @@ from typing import TypeVar, Generic, List, get_origin, get_args
 import json
 
 T = TypeVar('T')
-
+# Herramientas para interactuar con la base de datos
 class InterfaceRepositorio(Generic[T]):
     def __init__(self):
         ca = certifi.where()
