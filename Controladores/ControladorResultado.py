@@ -1,37 +1,42 @@
 from Modelos.Resultado import Resultado
-
+from Modelos.Mesa import Mesa
+from Modelos.Candidato import Candidato
+from Repositorios.RepositorioResultado import RepositorioResultado
+from Repositorios.RepositorioMesa import RepositorioMesa
+from Repositorios.RepositorioCandidato import RepositorioCandidato
 class ControladorResultado():
     def __init__(self):
-        print("Creando ControladorResultado")
+        self.repositorioResultado = RepositorioResultado()
+        self.repositorioMesa = RepositorioMesa()
+        self.repositorioCandidato = RepositorioCandidato()
 
     def index(self):
-        print("Listar todos los resultados")
-        unResultado = {
-            "id": "abc128",
-            "numero_mesa": "1",
-            "id_partido": "2"
-        }
-        return [unResultado]
+        return self.repositorioResultado.findAll()
 
-    def create(self, infoResultado):
-        #print("Crear un resultado")
-        elResultado = Resultado(infoResultado)
-        return elResultado.__dict__
+    #Asignacion mesa y candidato a resultado
+    def create(self, infoResultado, id_mesa, id_candidato):
+        nuevoResultado = Resultado(infoResultado)
+        laMesa = Mesa(self.repositorioMesa.findById(id_mesa))
+        elCandidato = Candidato(self.repositorioCandidato.findById(id_candidato))
+        nuevoResultado.mesa = laMesa
+        nuevoResultado.candidato = elCandidato
+        return self.repositorioCandidato.save(nuevoResultado)
 
     def show(self, id):
-        #print("Mostrando un resultado con id ", id)
-        elResultado = {
-            "id": "abc128",
-            "numero_mesa": "1",
-            "id_partido": "2"
-        }
-        return elResultado
-
-    def update(self, id, infoResultado):
-        print("Actualizando resultado con id ", id)
-        elResultado = Resultado(infoResultado)
+        elResultado = Resultado(self.repositorioResultado.findById(id))
         return elResultado.__dict__
 
+    #Modificación de inscripción(estudiante y materia)
+
+    def update(self,id,infoResultado,id_mesa,id_candidato):
+        elResultado=Resultado(self.repositorioResultado.findById(id))
+        elResultado.numero_mesa=infoResultado["numero_mesa"]
+        elResultado.id_partido = infoResultado["id_partido"]
+        laMesa = Mesa(self.repositorioMesa.findById(id_mesa))
+        elCandidato = Candidato(self.repositorioCandidato.findById(id_candidato))
+        elResultado.mesa = laMesa
+        elResultado.candidato = elCandidato
+        return self.repositorioResultado.save(elResultado)
+
     def delete(self, id):
-        print("Elimiando resultado con id ", id)
-        return {"deleted_count": 1}
+       return self.repositorioInscripcion.delete(id)

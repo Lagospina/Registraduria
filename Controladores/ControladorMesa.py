@@ -15,6 +15,7 @@ class ControladorMesa():
     def show(self, id):
         laMesa = Mesa(self.repositorioMesa.findById(id))
         return laMesa.__dict__
+
     def update(self, id, infoMesa):
         mesaActual = Mesa(self.repositorioMesa.findById(id))
         mesaActual.numero = infoMesa["numero"]

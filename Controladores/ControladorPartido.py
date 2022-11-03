@@ -1,36 +1,26 @@
+from Repositorios.RepositorioPartido import RepositorioPartido
 from Modelos.Partido import Partido
 
 class ControladorPartido():
     def __init__(self):
-        print("Creando ControladorPartido")
+        self.repositorioPartido = RepositorioPartido()
 
     def index(self):
-        print("Listar todos los partidos")
-        elPartido = {
-            "id": "1",
-            "nombre": "Esperanza Verde",
-            "lema": "Por un mejor vividero"
-        }
-        return [elPartido]
+        return self.repositorioPartido.findAll()
+
     def create(self, infoPartido):
-        print("Crear un partido")
-        elPartido = Partido(infoPartido)
-        return elPartido.__dict__
+        nuevoPartido = Partido(infoPartido)
+        return self.repositorioPartido.save(nuevoPartido)
 
     def show(self, id):
-        print("Mostrando un partido con id ", id)
-        elPartido = {
-            "id": "1",
-            "nombre": "Esperanza Verde",
-            "lema": "Por un mejor vividero"
-        }
-        return elPartido
-
-    def update(self, id, infoPartido):
-        print("Actualizando partido con id ", id)
-        elPartido = Partido(infoPartido)
+        elPartido = Partido(self.repositorioPartido.findById(id))
         return elPartido.__dict__
 
+    def update(self, id, infoPartido):
+        partidoActual = Partido(self.repositorioPartido.findById(id))
+        partidoActual.nombre = infoPartido["nombre"]
+        partidoActual.lema = infoPartido["lema"]
+        return self.repositorioPartido.save(partidoActual)
+
     def delete(self, id):
-        print("Elimiando partido con id ", id)
-        return {"deleted_count": 1}
+        return self.repositorioPartido.delete(id)
