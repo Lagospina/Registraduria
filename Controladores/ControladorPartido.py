@@ -1,5 +1,6 @@
 from Repositorios.RepositorioPartido import RepositorioPartido
 from Modelos.Partido import Partido
+from Repositorios.RepositorioPartido import RepositorioPartido
 
 class ControladorPartido():
     def __init__(self):
@@ -18,6 +19,10 @@ class ControladorPartido():
 
     def update(self, id, infoPartido):
         partidoActual = Partido(self.repositorioPartido.findById(id))
+<<<<<<< HEAD
+=======
+        partidoActual.id = infoPartido["id"]
+>>>>>>> 2529a974ab4711442d1358b9242c7cd401a6849b
         partidoActual.nombre = infoPartido["nombre"]
         partidoActual.lema = infoPartido["lema"]
         return self.repositorioPartido.save(partidoActual)
