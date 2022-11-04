@@ -1,6 +1,6 @@
 from Repositorios.RepositorioCandidato import RepositorioCandidato
-from Modelos.Candidato import Candidato
 from Repositorios.RepositorioPartido import RepositorioPartido
+from Modelos.Candidato import Candidato
 from Modelos.Partido import Partido
 
 class ControladorCandidato():

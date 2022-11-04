@@ -109,7 +109,6 @@ def eliminarResultado(id_resultado):
     json = miControladorResultado.delete(id_resultado)
     return jsonify(json)
 
-
 # Finaliza controladorResultado
 
 # Métodos controladorPartido

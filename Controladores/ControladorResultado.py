@@ -26,7 +26,7 @@ class ControladorResultado():
         elResultado = Resultado(self.repositorioResultado.findById(id))
         return elResultado.__dict__
 
-    #Modificación de inscripción(estudiante y materia)
+    #Modificación de inscripción(mesa y candidato)
 
     def update(self,id,infoResultado,id_mesa,id_candidato):
         elResultado=Resultado(self.repositorioResultado.findById(id))
@@ -39,4 +39,4 @@ class ControladorResultado():
         return self.repositorioResultado.save(elResultado)
 
     def delete(self, id):
-       return self.repositorioInscripcion.delete(id)
+       return self.repositorioResultado.delete(id)
