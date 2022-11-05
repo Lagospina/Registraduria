@@ -20,7 +20,7 @@ class ControladorResultado():
         elCandidato = Candidato(self.repositorioCandidato.findById(id_candidato))
         nuevoResultado.mesa = laMesa
         nuevoResultado.candidato = elCandidato
-        return self.repositorioCandidato.save(nuevoResultado)
+        return self.repositorioResultado.save(nuevoResultado)
 
     def show(self, id):
         elResultado = Resultado(self.repositorioResultado.findById(id))
