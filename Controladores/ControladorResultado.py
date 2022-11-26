@@ -36,14 +36,14 @@ class ControladorResultado():
     """
         Modificar Resultado (candidato y mesa)
     """
-    def update(self, id, infoResultado, id_candidato, id_mesa):
-        print("Actualizando resultado: ", id)
+    def update(self, id, infoResultado, id_mesa,id_candidato):
         resultadoActual = Resultado(self.repositorioResultado.findById(id))
+        laMesa = Mesa(self.repositorioMesa.findById(id_mesa))
+        elCandidato = Candidato(self.repositorioCandidato.findById(id_candidato))
         resultadoActual.numero_mesas = infoResultado["numero_mesas"]
         resultadoActual.cedula_candidato = infoResultado["cedula_candidato"]
         resultadoActual.numero_votos = infoResultado["numero_votos"]
-        laMesa =Mesa(self.repositorioMesa.findById(id_mesa))
-        elCandidato = Candidato(self.repositorioCandidato.findById(id_candidato))
+
         resultadoActual.mesa = laMesa
         resultadoActual.candidato = elCandidato
         return self.repositorioResultado.save(resultadoActual)
